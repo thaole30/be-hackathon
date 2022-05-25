@@ -16,6 +16,7 @@ const UserSchema = new Schema({
     email: {
       type: String,
       trim: true,
+      unique: true,
       required: [true, "email must be required"],
     },
     password: {
@@ -28,6 +29,33 @@ const UserSchema = new Schema({
       type: Boolean,
       default: false,
     },
+    specialties: {
+      type: Array,
+      default: [],
+    },
+    skills: {
+      type: Array,
+      default: [],
+    },
+    interests: {
+      type: Array,
+      default: [],
+    },
+
+    location: {
+      type: String,
+    },
+    occupation: {
+      type: Number,
+    },
+
+    currentStudentLevel: "",
+    schoolName: "",
+    graduationMonth: "",
+    graduationYear: "",
+    birthMonth: "",
+    birthYear: "",
+
   });
 
 module.exports = mongoose.model("User", UserSchema);
