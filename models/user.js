@@ -8,6 +8,14 @@ const UserSchema = new Schema({
       trim: true,
       required: [true, "firstName must be required"],
     },
+    name: {
+      type: String,
+      default: "",
+    },
+    img: {
+      type: String,
+      default: "",
+    },
     lastName: {
       type: String,
       trim: true,
@@ -29,9 +37,9 @@ const UserSchema = new Schema({
       type: Boolean,
       default: false,
     },
-    specialties: {
-      type: Array,
-      default: [],
+    specialty: {
+      type: String,
+      default: "",
     },
     skills: {
       type: Array,
@@ -47,14 +55,36 @@ const UserSchema = new Schema({
     },
     occupation: {
       type: Number,
+      default: 1,
     },
-
-    currentStudentLevel: "",
-    schoolName: "",
-    graduationMonth: "",
-    graduationYear: "",
-    birthMonth: "",
-    birthYear: "",
+    employedInTech: {
+      type: Boolean,
+      default: true,
+    },
+    currentStudentLevel: {
+      type: String,
+    },
+    schoolName: {
+      type: String,
+    },
+    workInTechMonth: {
+      type: String,
+    },
+    workInTechYear: {
+      type: String,
+    },
+    graduationMonth: {
+      type: String,
+    },
+    graduationYear: {
+      type: String,
+    },
+    birthMonth: {
+      type: String,
+    },
+    birthYear: {
+      type: String,
+    },
 
   });
 
