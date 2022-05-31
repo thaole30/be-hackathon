@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
 
     if(authHeader) {
         const token = authHeader.split(' ')[1];
-        console.log("token in BE", token);
+        // console.log("token in BE", token);
 
         let decodedData;
 
@@ -18,7 +18,7 @@ const verifyToken = (req, res, next) => {
                     return res.status(403).json("Token is not valid!")
                 };
 
-                console.log("decodedData", decodedInfo);
+                // console.log("decodedData", decodedInfo);
                 decodedData = decodedInfo;
                 req.decodedData = decodedData;
             })

@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
 const userRouter = require('./routes/user');
+const uploadRouter = require('./routes/upload');
+// const projectRouter = require('./routes/project');
 
 
 const mongoose = require('mongoose');
@@ -30,5 +32,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 //routes
 app.use('/users', userRouter);
+app.use('/uploads', uploadRouter);
+// app.use('/projects', projectRouter);
 
 

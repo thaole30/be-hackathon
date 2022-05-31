@@ -8,7 +8,7 @@ const {
 const getUserService = (id) => {
     return getUserByIdRepo(id);
 };
-  
+
 
 const updateUserService = (id, updatedInfo) => {
     return updateUserRepo(id, updatedInfo);

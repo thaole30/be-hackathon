@@ -8,6 +8,11 @@ const UserSchema = new Schema({
       trim: true,
       required: [true, "firstName must be required"],
     },
+    lastName: {
+      type: String,
+      trim: true,
+      required: [true, "lastName must be required"],
+    },
     name: {
       type: String,
       default: "",
@@ -16,10 +21,25 @@ const UserSchema = new Schema({
       type: String,
       default: "",
     },
-    lastName: {
+    bio: {
       type: String,
-      trim: true,
-      required: [true, "lastName must be required"],
+      default: "",
+    },
+    github: {
+      type: String,
+      default: "",
+    },
+    linkedIn: {
+      type: String,
+      default: "",
+    },
+    twitter: {
+      type: String,
+      default: "",
+    },
+    website: {
+      type: String,
+      default: "",
     },
     email: {
       type: String,
