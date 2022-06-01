@@ -1,11 +1,13 @@
 const express = require('express');
 const userRouter = express.Router();
 const {signUp, signIn, updateUser, getUser} = require('../controllers/user');
+const { registerUserSchema, updateUserSchema } = require('../middleware/validateSchema');
 const { verifyTokenAndAuthorization } = require('../middleware/verify');
+const { containerErr } = require('../utils/containerErr');
 
-userRouter.post('/signup', signUp);
-userRouter.post('/signin', signIn);
-userRouter.get('/',verifyTokenAndAuthorization, getUser);
-userRouter.post('/update', verifyTokenAndAuthorization, updateUser);
+userRouter.post('/signup',registerUserSchema, containerErr(signUp));
+userRouter.post('/signin', containerErr(signIn));
+userRouter.get('/',verifyTokenAndAuthorization, containerErr(getUser));
+userRouter.post('/update', verifyTokenAndAuthorization, updateUserSchema, containerErr(updateUser));
 
 module.exports = userRouter

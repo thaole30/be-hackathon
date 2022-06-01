@@ -6,6 +6,7 @@ const http = require('http');
 const userRouter = require('./routes/user');
 const uploadRouter = require('./routes/upload');
 const projectRouter = require('./routes/project');
+const handleError = require("./middleware/handleError");
 
 
 const mongoose = require('mongoose');
@@ -34,5 +35,6 @@ mongoose.connect(process.env.MONGO_URL)
 app.use('/users', userRouter);
 app.use('/uploads', uploadRouter);
 app.use('/projects', projectRouter);
+app.use(handleError)
 
 

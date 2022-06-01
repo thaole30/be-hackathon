@@ -51,7 +51,7 @@ const signUp = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({
-            message: 'Something went wrong'
+            message: 'Something went wrong controller'
         })
     }
 }
@@ -91,7 +91,7 @@ const signIn = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({
-            message: 'Something went wrong'
+            message: 'Something went wrong controller'
         })
     }
 
