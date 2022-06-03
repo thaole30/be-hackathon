@@ -22,7 +22,28 @@ function updateUserSchema(req, res, next) {
     const schema = Joi.object({
         firstName: Joi.string().empty(''),
         lastName: Joi.string().empty(''),
-        email: Joi.string().email().empty(''),
+        img: Joi.string().empty(''),
+        bio: Joi.string().empty(''),
+        github: Joi.string().empty(''),
+        linkedIn: Joi.string().empty(''),
+        twitter: Joi.string().empty(''),
+        website: Joi.string().empty(''),
+        img: Joi.string().empty(''),
+        specialty: Joi.string().empty(''),
+        skills: Joi.array().empty(''),
+        interests: Joi.array().empty(''),
+        location: Joi.string().empty(''),
+        occupation: Joi.number().empty(''),
+        employedInTech: Joi.boolean().empty(''),
+        currentStudentLevel: Joi.string().empty(''),
+        schoolName: Joi.string().empty(''),
+        workInTechMonth: Joi.string().empty(''),
+        workInTechYear: Joi.string().empty(''),
+        graduationMonth: Joi.string().empty(''),
+        graduationYear: Joi.string().empty(''),
+        birthMonth: Joi.string().empty(''),
+        birthYear: Joi.string().empty(''),
+
     });
 
     validateRequest(req,res, next, schema);

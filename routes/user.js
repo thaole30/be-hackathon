@@ -10,4 +10,18 @@ userRouter.post('/signin', containerErr(signIn));
 userRouter.get('/',verifyTokenAndAuthorization, containerErr(getUser));
 userRouter.post('/update', verifyTokenAndAuthorization, updateUserSchema, containerErr(updateUser));
 
+
 module.exports = userRouter
+
+
+
+
+
+
+
+
+
+
+
+
+

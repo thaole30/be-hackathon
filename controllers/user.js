@@ -9,7 +9,7 @@ const signUp = async (req, res) => {
     console.log("sign uppppppp")
     const {email, password} = req.body;
 
-    try {
+  
         const existingUser = await User.findOne({email: email});
 
         if(existingUser) {
@@ -49,18 +49,14 @@ const signUp = async (req, res) => {
             token: token
         })
 
-    } catch (error) {
-        res.status(500).json({
-            message: 'Something went wrong controller'
-        })
-    }
+    
 }
 
 const signIn = async (req, res) => {
     console.log("sign innnnn")
     const {email, password: enteredPassword} = req.body;
 
-    try {
+   
         const existingUser = await User.findOne({email});
         console.log("existingUser", existingUser)
 
@@ -88,13 +84,6 @@ const signIn = async (req, res) => {
             token: token,
         })
 
-
-    } catch (error) {
-        res.status(500).json({
-            message: 'Something went wrong controller'
-        })
-    }
-
 }
 
 
@@ -116,8 +105,6 @@ const updateUser = async (req, res) => {
     }
 
     // console.log("req.body", req.body)
-
-    try {
         const updatedUser = await updateUserService(req.decodedData.userId, req.body);
         console.log("updatedUser", updatedUser);
 
@@ -141,12 +128,7 @@ const updateUser = async (req, res) => {
             token: token,
         })
 
-      } catch (error) {
-        console.log("update user", error);
-        res.status(500).json({
-            message: 'Update user failed'
-        })
-    }
+      
 }
 
 module.exports = {

@@ -2,36 +2,40 @@ const mongoose = require('mongoose');
 const Project = require('../models/project');
 const md5 = require("md5");
 const jwt = require ('jsonwebtoken');
-const { createProjectService, updateProjectService, getProjectService } = require('../services/project');
+const { createProjectService, updateProjectService, getProjectByIdService, getAllProjectsService, getUserProjectsService} = require('../services/project');
+
+
+
+const getAllProjects = async (req, res) => {
+    const projects = await getAllProjectsService();
+    res.status(200).json(projects).end();
+}
+
 
 const getProject = async (req, res) => {
     const {id} = req.params;
     console.log("getProject be id", id)
 
-    try {
-        const project = await getProjectService(id);
-        console.log("exist project", project);
-        res.status(200).json(project)
+    const project = await getProjectByIdService(id);
+    console.log("exist project", project);
+    res.status(200).json(project)
 
-    } catch (error) {
-        res.status(500).json({
-            message: 'Something went wrong'
-        })
-    }
+}
+
+
+const getUserProjects = async (req, res) => {
+    const userId = req.decodedData.userId;
+    console.log("userId", userId);
+    const projects = await getUserProjectsService(userId);
+    res.status(200).json(projects).end();
 }
 
 
 const createProject = async (req, res) => {
     const data = req.body;
-    try {
-        const newProject = await createProjectService({...data, creator: req.decodedData.userId});
-        res.status(200).json(newProject)
-    } catch (error) {
-        res.status(500).json({
-            message: 'Something went wrong'
-        })
-    }
-
+    
+    const newProject = await createProjectService({...data, creator: req.decodedData.userId});
+    res.status(200).json(newProject)
 }
 
 const updateProject = async (req, res) => {
@@ -41,13 +45,9 @@ const updateProject = async (req, res) => {
 
     const data = req.body;
 
-    try {
-        const updatedProject = await updateProjectService(id, data);
-        res.status(200).json(updatedProject);
-        
-    } catch (error) {
-        res.status(500).json({ err: error.message})   
-    }
+    const updatedProject = await updateProjectService(id, data);
+    res.status(200).json(updatedProject);
+
 }
 
 
@@ -55,5 +55,7 @@ const updateProject = async (req, res) => {
 module.exports = {
     createProject,
     getProject,
-    updateProject
+    updateProject,
+    getAllProjects,
+    getUserProjects
 }

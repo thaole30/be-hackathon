@@ -57,6 +57,10 @@ const ProjectSchema = Schema({
      type: String, 
      required: true 
   },
+  creatorName: {
+     type: String, 
+     required: true 
+  },
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);
