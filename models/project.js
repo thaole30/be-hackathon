@@ -14,6 +14,10 @@ const ProjectSchema = Schema({
     type: String,
     default: "",
   },
+  contribution: {
+    type: String,
+    default: "Ex: I worked on the back-end. It was my first time using Node, which was a little intimidating, but I learned a lot.",
+  },
   img: {
     type: String,
     default: "https://crowdhack.io/static/media/thumbnail-placeholder.e45c0561.jpg",
@@ -53,14 +57,18 @@ const ProjectSchema = Schema({
     type: Array,
     default: [],
   },
+  // creator: {
+  //    type: String, 
+  //    required: true 
+  // },
+  // creatorName: {
+  //    type: String, 
+  //    required: true 
+  // },
   creator: {
-     type: String, 
-     required: true 
-  },
-  creatorName: {
-     type: String, 
-     required: true 
-  },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);

@@ -9,7 +9,7 @@ const getAllProjectsRepo = async () => {
   }
 
 const getProjectByIdRepo =  async(id) => {
-    const project = await Project.findOne({ _id: mongoose.Types.ObjectId(id) })
+    const project = await Project.findOne({ _id: mongoose.Types.ObjectId(id) }).populate('creator', 'name img')
     return project
 }
 
