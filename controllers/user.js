@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const md5 = require("md5");
 const jwt = require ('jsonwebtoken');
-const { updateUserService, getUserService } = require('../services/user');
+const { updateUserService, getUserByIdService, getUserByUsernameService } = require('../services/user');
 
 
 const signUp = async (req, res) => {
@@ -90,7 +90,20 @@ const signIn = async (req, res) => {
 const getUser = async (req, res) => {
     console.log("get user");
     try {
-      const result = await getUserService(req.decodedData.userId);
+      const result = await getUserByIdService(req.decodedData.userId);
+      console.log("result", result);
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ message: "user not found!" });
+    }
+  };
+const getUserByUsername = async (req, res) => {
+    console.log("get user by username");
+    const {userName} = req.params;
+
+    try {
+      const result = await getUserByUsernameService(userName);
       console.log("result", result);
       res.status(200).json(result);
     } catch (error) {
@@ -136,4 +149,5 @@ module.exports = {
     signIn,
     getUser,
     updateUser,
+    getUserByUsername
 }

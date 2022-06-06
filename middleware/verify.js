@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
 
     if(authHeader) {
         const token = authHeader.split(' ')[1];
-        // console.log("token in BE", token);
+        console.log("token in BE", token);
 
         let decodedData;
 

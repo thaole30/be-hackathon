@@ -4,13 +4,19 @@ const Project = require('../models/project');
 
 
 const getAllProjectsRepo = async () => {
-    const projects = await Project.find();
+    const projects = await Project.find().populate('creator', 'name img');
     return projects;
   }
 
 const getProjectByIdRepo =  async(id) => {
-    const project = await Project.findOne({ _id: mongoose.Types.ObjectId(id) }).populate('creator', 'name img')
-    return project
+  const project = await Project.findOne({ _id: mongoose.Types.ObjectId(id) }).populate('creator', 'name img')
+  return project
+}
+
+
+const getProjectByQuery = async(query) => {
+  const result = await Project.find(query);
+  return result;
 }
 
 const getUserProjectsRepo = async (userId) => {
@@ -43,5 +49,6 @@ module.exports = {
     createProjectRepo,
     updateProjectRepo,
     getAllProjectsRepo,
-    getUserProjectsRepo
+    getUserProjectsRepo,
+    getProjectByQuery
 }

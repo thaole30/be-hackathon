@@ -43,6 +43,7 @@ function updateUserSchema(req, res, next) {
         graduationYear: Joi.string().empty(''),
         birthMonth: Joi.string().empty(''),
         birthYear: Joi.string().empty(''),
+        myHackathons: Joi.array().empty(''),
 
     });
 

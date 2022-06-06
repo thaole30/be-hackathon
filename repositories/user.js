@@ -8,6 +8,10 @@ const getUserByIdRepo =  async(id) => {
     return user
 }
 
+const getUserByUsernameRepo = async(userName) => {
+    const user = await User.findOne({ name: userName }).populate("projectIds").populate("myHackathons");
+    return user
+}
 
 const updateUserRepo = async (id, updatedInfo) => {
     console.log("id in repo", id);
@@ -21,4 +25,5 @@ const updateUserRepo = async (id, updatedInfo) => {
 module.exports = {
     getUserByIdRepo,
     updateUserRepo,
+    getUserByUsernameRepo
 }
