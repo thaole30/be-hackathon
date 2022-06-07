@@ -6,6 +6,7 @@ const { containerErr } = require('../utils/containerErr');
 
 hackathonRouter.get('/',  getAllHackathons);
 hackathonRouter.get('/userHackathons',verifyTokenAndAuthorization,  getUserHackathons);
+// hackathonRouter.get('/myHackathons', getMyHackathons);
 hackathonRouter.get('/:id', getHackathonById);
 hackathonRouter.post('/', verifyTokenAndAuthorization, createHackathon);
 hackathonRouter.post('/:id', verifyTokenAndAuthorization, updateHackathon);

@@ -16,8 +16,8 @@ const postUploadFile = async (req, res) => {
     const {_id: fileId} = result._doc;
     console.log("fileId", fileId);
     // console.log(`${process.env.URL_SERVER}uploads/${fileId}`)
-    res.send(`${process.env.URL_SERVER}uploads/${fileId}`);
-    // res.send(`http://localhost:7000/uploads/${fileId}`);
+    // res.send(`${process.env.URL_SERVER}uploads/${fileId}`);
+    res.send(`http://localhost:7000/uploads/${fileId}`);
 }
 
 const getUploadFile = async (req, res) => {

@@ -20,7 +20,7 @@ const getHackathonByQuery = async(query) => {
 }
 
 const getUserHackathonsRepo = async (userId) => {
-  const hackathons = await Hackathon.find({creator: userId});
+  const hackathons = await Hackathon.find({creator: userId}).populate('creator', 'name img')
   return hackathons;
 }
 

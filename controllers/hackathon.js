@@ -11,6 +11,11 @@ const getAllHackathons = async (req, res) => {
     res.status(200).json(hackathons).end();
 }
 
+// const getMyHackathons = async (req, res) => {
+//     const myHackathons = await getMyHackathonsService();
+//     res.status(200).json(myHackathons).end();
+// }
+
 
 const getHackathonById = async (req, res) => {
     const {id} = req.params;
@@ -24,6 +29,7 @@ const getHackathonById = async (req, res) => {
 
 
 const getUserHackathons = async (req, res) => {
+    console.log("checkkkkk")
     const userId = req.decodedData.userId;
     console.log("userId", userId);
     const hackathons = await getUserHackathonsService(userId);
@@ -34,6 +40,7 @@ const getUserHackathons = async (req, res) => {
 const createHackathon = async (req, res) => {
     console.log("createeeeeeeeee")
     const data = req.body;
+    console.log("data", data);
     
     const newHackathon = await createHackathonService({...data, creator: req.decodedData.userId});
     res.status(200).json(newHackathon)
