@@ -28,7 +28,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+// app.use(cors());
 
 passport.use(
   new GoogleStrategy(
