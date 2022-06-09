@@ -10,18 +10,18 @@ const options = {
 
 function registerUserSchema(req, res, next) {
     const schema = Joi.object({
-        firstName: Joi.string().required(),
-        lastName: Joi.string().required(),
+        // firstName: Joi.string().required(),
+        // lastName: Joi.string().required(),
         email: Joi.string().email().empty(''),
-        password: Joi.string().min(6).required(),
+        // password: Joi.string().min(6).required(),
     });
     validateRequest(req,res, next, schema);
 }
 
 function updateUserSchema(req, res, next) {
     const schema = Joi.object({
-        firstName: Joi.string().empty(''),
-        lastName: Joi.string().empty(''),
+        // firstName: Joi.string().empty(''),
+        // lastName: Joi.string().empty(''),
         img: Joi.string().empty(''),
         bio: Joi.string().empty(''),
         github: Joi.string().empty(''),

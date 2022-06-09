@@ -3,12 +3,23 @@ const Project = require('../models/project');
 const md5 = require("md5");
 const jwt = require ('jsonwebtoken');
 const { createProjectService, updateProjectService, getProjectByIdService, getAllProjectsService, getUserProjectsService} = require('../services/project');
-
+const myModule = require('../index');
 
 
 const getAllProjects = async (req, res) => {
+    const DEFAULT_EX = 3600;
+
+
+    const cacheData = await myModule.redisClient.get("all-projects");
+    if (cacheData != null) {
+        console.log("cache", cacheData);
+       
+        return res.send(JSON.parse(cacheData));
+    }
     const projects = await getAllProjectsService();
+    myModule.redisClient.setEx("all-projects", DEFAULT_EX, JSON.stringify(projects));
     res.status(200).json(projects).end();
+   
 }
 
 

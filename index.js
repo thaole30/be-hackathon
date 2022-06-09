@@ -11,6 +11,9 @@ const handleError = require("./middleware/handleError");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const { default: axios } = require("axios");
+const redisClient = require("redis").createClient();
+// const newRedisClients = redisClient;
+
 
 
 const googleClientID =
@@ -43,17 +46,24 @@ passport.use(
 
 const PORT = process.env.PORT || 7000;
 
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => {
-    //connect successfully
-    app.listen(PORT, () => {
-      console.log(`server running on port ${PORT}`);
+const main = async () => {
+  mongoose
+    .connect(process.env.MONGO_URL)
+    .then(() => {
+      //connect successfully
+      app.listen(PORT, () => {
+        console.log(`server running on port ${PORT}`);
+      });
+    })
+    .catch((error) => {
+      console.log("error", error.message);
     });
-  })
-  .catch((error) => {
-    console.log("error", error.message);
-  });
+
+  await redisClient.connect();
+
+}
+
+main();
 
 //routes
 // -----------------------GITHUB---------------------
@@ -100,7 +110,7 @@ const setCookie = (req, res, next) => {
   res.cookie("token", " req.user.auth.token", {
     httpOnly: true,
     sameSite: "strict",
-    path: "https://free-agent-projects.vercel.app/login",
+    path: "https://crowhack-project.web.app/",
     secure: process.env.NODE_ENV !== "development",
   });
   next();
@@ -118,8 +128,30 @@ app.get(
   }
 );
 
+
+// -----------REDIS-----------
+const DEFAULT_EX = 3600;
+async function demoRedis() {
+  app.get("/redis-projects", async (req, res) => {
+    const cacheData = await redisClient.get("projects");
+    if (cacheData != null) {
+      console.log("cache", cacheData);
+      return res.send(JSON.parse(cacheData));
+    }
+    const { data } = await axios.get("http://localhost:7000/projects");
+    redisClient.setEx("projects", DEFAULT_EX, JSON.stringify(data));
+    res.send(data);
+  });
+}
+demoRedis();
+
+
 app.use("/users", userRouter);
 app.use("/uploads", uploadRouter);
 app.use("/projects", projectRouter);
 app.use("/hackathons", hackathonRouter);
+
 app.use(handleError);
+
+
+exports.redisClient = redisClient;

@@ -5,12 +5,12 @@ const UserSchema = new Schema({
   firstName: {
     type: String,
     trim: true,
-    required: [true, "firstName must be required"],
+    // required: [true, "firstName must be required"],
   },
   lastName: {
     type: String,
     trim: true,
-    required: [true, "lastName must be required"],
+    // required: [true, "lastName must be required"],
   },
   name: {
     type: String,
@@ -49,8 +49,8 @@ const UserSchema = new Schema({
   password: {
     type: String,
     trim: true,
-    required: [true, "password must be required"],
-    minLength: [6, "password must be at least 5 characters"],
+    // required: [true, "password must be required"],
+    // minLength: [6, "password must be at least 5 characters"],
   },
   isAdmin: {
     type: Boolean,

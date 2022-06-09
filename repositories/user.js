@@ -22,8 +22,24 @@ const updateUserRepo = async (id, updatedInfo) => {
   };
   
 
+const logInWithGoogleRepo = async(formData) => {
+    const newUser = await new User({
+        ...formData,
+        img: `https://i.pravatar.cc/150?u=${formData.firstName}${formData.lastName}`,
+        name: `${formData.firstName}${formData.lastName}`,
+    });
+
+    const savedUser = await newUser.save();
+    console.log("savedUser", savedUser._doc);
+    const {...others} = savedUser._doc;
+
+    return savedUser._doc;
+  
+}
+
 module.exports = {
     getUserByIdRepo,
     updateUserRepo,
-    getUserByUsernameRepo
+    getUserByUsernameRepo,
+    logInWithGoogleRepo
 }
